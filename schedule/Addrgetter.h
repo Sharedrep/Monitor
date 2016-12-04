@@ -25,9 +25,10 @@ public:
     Addrgetter(const Addrgetter& orig);
     virtual ~Addrgetter();
 
+    void GetAddrinfo(); 
     int  getHostByName(HttpMonitor * pmon);
-    void  AddMonitor(HttpMonitor*& pmon);
-    void  RemoveMonitor(HttpMonitor * pmon);
+    void AddMonitor(HttpMonitor*& pmon);
+    void RemoveMonitor(HttpMonitor * pmon);
 
 private:
     void maxFd(int fd) ;

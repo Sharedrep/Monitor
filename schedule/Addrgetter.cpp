@@ -28,7 +28,6 @@ Addrgetter::~Addrgetter()
 {
 }
 
-
 int Addrgetter::getHostByName(HttpMonitor * pmon) 
 {
    struct addrinfo *aInf = NULL;
@@ -40,24 +39,22 @@ int Addrgetter::getHostByName(HttpMonitor * pmon)
 
   while (true)
   {
-     int ret = getaddrinfo_a(GAI_NOWAIT, reqs, nreqs, NULL);
-              
-     if ( ret < 0)
+     if (nreqs > 1) 
      {
-       fail = true;
-       break;
+         int ret = getaddrinfo_a(GAI_NOWAIT, reqs, nreqs, NULL);
+         if ( ret < 0)
+             std::cout<<"Failed getaddrinfo:"<<strerror(errno)<<std::endl;
      }
 
      for (size_t j = 0; j < nreqs; j++)
      {
          int remain = nreqs-j;
-         ret = gai_suspend(reqs, remain, &timeout);
+         int ret = gai_suspend(reqs, remain, &timeout);
          if (ret < 0 && (errno == EAI_AGAIN || errno == EAI_INTR))
             continue;
          for (int i = 0; i < remain; i++)
          {
              int rc = gai_error(reqs[i]);
-                 std::cout<<reqs[j]->ar_name;
              if (rc == EAI_INPROGRESS)
                  continue;
              if (rc == 0)

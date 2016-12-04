@@ -65,7 +65,7 @@ void* Monitor::getHosts(void *arg)
         addrgetter->getHostByName(pmon);
         if (pmon != NULL) 
         {
-            std::cout<<pmon->_url;
+            std::cout<<pmon->_url<<std::endl;
             //addrgetter->RemoveMonitor(pmon);
         }
     }
