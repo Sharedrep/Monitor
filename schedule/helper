@@ -1,0 +1,3 @@
+sudo valgrind --leak-check=yes --leak-check=full --show-leak-kinds=all --track-origins=yes -v 
+cat -e -t -v
+objdump -d a.out
